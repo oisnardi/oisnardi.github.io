@@ -2,10 +2,337 @@
 <html lang="es">
   <head>
     <meta charset="utf-8">
-    <title>Oisnardi Apps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sitio personal de Oisnardi, desarrollador independiente de aplicaciones moviles.">
+    <title>Oisnardi | Desarrollador independiente</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f4ef;
+        --paper: #fffdf8;
+        --ink: #171717;
+        --muted: #5f625c;
+        --line: #ded8cc;
+        --accent: #2d6a4f;
+        --accent-dark: #1f4d3a;
+        --soft: #e9efe8;
+        --shadow: 0 24px 60px rgba(29, 34, 30, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(45, 106, 79, 0.16), transparent 34rem),
+          linear-gradient(180deg, #fbfaf6 0%, var(--bg) 48%, #ede8dd 100%);
+        color: var(--ink);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 28px 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(255, 255, 255, 0.86);
+        box-shadow: 0 10px 26px rgba(24, 33, 26, 0.16);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+        gap: 56px;
+        align-items: center;
+        padding: 56px 0 72px;
+      }
+
+      .hero h1 {
+        margin: 0;
+        max-width: 820px;
+        font-size: clamp(3rem, 7vw, 6.9rem);
+        line-height: 0.95;
+        letter-spacing: 0;
+        font-weight: 850;
+      }
+
+      .hero p {
+        margin: 28px 0 0;
+        max-width: 680px;
+        color: var(--muted);
+        font-size: clamp(1.05rem, 2vw, 1.34rem);
+        line-height: 1.65;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 20px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        text-decoration: none;
+        font-weight: 760;
+        font-size: 0.96rem;
+        transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      }
+
+      .button.primary {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+        box-shadow: 0 14px 32px rgba(45, 106, 79, 0.24);
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        border-color: rgba(45, 106, 79, 0.45);
+      }
+
+      .profile-card {
+        background: rgba(255, 253, 248, 0.84);
+        border: 1px solid rgba(222, 216, 204, 0.86);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+      }
+
+      .profile-photo {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 24px;
+        border: 1px solid rgba(222, 216, 204, 0.9);
+        background: var(--soft);
+      }
+
+      .profile-card h2 {
+        margin: 22px 0 8px;
+        font-size: 1.35rem;
+        line-height: 1.2;
+      }
+
+      .profile-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .section {
+        padding: 56px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section h2 {
+        margin: 0 0 22px;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .values {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .value {
+        min-height: 180px;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: rgba(255, 253, 248, 0.64);
+      }
+
+      .value strong {
+        display: block;
+        font-size: 1.08rem;
+        margin-bottom: 12px;
+      }
+
+      .value p,
+      .project p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.62;
+      }
+
+      .project {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 24px;
+        align-items: center;
+        padding: 28px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+      }
+
+      .project h3 {
+        margin: 0 0 10px;
+        font-size: 1.35rem;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 34px 0 44px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .footer a {
+        color: var(--accent-dark);
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      @media (max-width: 820px) {
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .hero {
+          grid-template-columns: 1fr;
+          gap: 32px;
+          padding-top: 28px;
+        }
+
+        .values,
+        .project {
+          grid-template-columns: 1fr;
+        }
+
+        .project .button {
+          width: 100%;
+        }
+
+        .footer {
+          flex-direction: column;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>Oisnardi Apps</h1>
-    <p>Developer website for Storage Cleaner & Analyzer.</p>
+    <main class="page">
+      <nav class="nav" aria-label="Navegacion principal">
+        <a class="brand" href="/" aria-label="Inicio">
+          <img class="brand-mark" src="https://avatars.githubusercontent.com/u/22476145?v=4" alt="Foto de perfil de Oisnardi">
+          <span>Oisnardi</span>
+        </a>
+        <div class="nav-links">
+          <a href="#trabajo">Trabajo</a>
+          <a href="#proyectos">Proyectos</a>
+          <a href="https://github.com/oisnardi" rel="me">GitHub</a>
+        </div>
+      </nav>
+
+      <section class="hero" aria-labelledby="titulo">
+        <div>
+          <h1 id="titulo">Desarrollo apps simples, utiles y confiables.</h1>
+          <p>
+            Soy un desarrollador independiente enfocado en crear experiencias moviles claras, practicas y respetuosas con las personas que las usan.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="https://play.google.com/store/apps/dev?id=6456388902186362553">Ver apps publicadas</a>
+            <a class="button" href="https://github.com/oisnardi">Ver GitHub</a>
+          </div>
+        </div>
+
+        <aside class="profile-card" aria-label="Perfil">
+          <img class="profile-photo" src="https://avatars.githubusercontent.com/u/22476145?v=4" alt="Foto de perfil de Oisnardi">
+          <h2>Oisnardi</h2>
+          <p>Dise&ntilde;o y construyo aplicaciones Android con foco en utilidad real, estabilidad y una interfaz facil de entender.</p>
+        </aside>
+      </section>
+
+      <section class="section" id="trabajo" aria-labelledby="trabajo-titulo">
+        <h2 id="trabajo-titulo">Como trabajo</h2>
+        <div class="values">
+          <article class="value">
+            <strong>Claridad primero</strong>
+            <p>Cada pantalla debe explicar que esta pasando, que puede hacer la persona y que consecuencias tiene cada accion.</p>
+          </article>
+          <article class="value">
+            <strong>Respeto por los datos</strong>
+            <p>Construyo funciones con cuidado por la privacidad, permisos transparentes y decisiones reversibles cuando el contexto lo permite.</p>
+          </article>
+          <article class="value">
+            <strong>Calidad sostenible</strong>
+            <p>Prefiero bases tecnicas simples, mantenibles y preparadas para crecer sin volver pesada la experiencia.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="proyectos" aria-labelledby="proyectos-titulo">
+        <h2 id="proyectos-titulo">Proyectos</h2>
+        <article class="project">
+          <div>
+            <h3>Aplicaciones moviles independientes</h3>
+            <p>
+              Publico herramientas para Android orientadas a resolver tareas concretas con una experiencia directa y confiable.
+            </p>
+          </div>
+          <a class="button" href="https://play.google.com/store/apps/dev?id=6456388902186362553">Abrir Google Play</a>
+        </article>
+      </section>
+
+      <footer class="footer">
+        <span>&copy; 2026 Oisnardi. Sitio personal de desarrollador.</span>
+        <a href="/app-ads.txt">app-ads.txt</a>
+      </footer>
+    </main>
   </body>
 </html>
